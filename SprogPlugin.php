@@ -14,13 +14,12 @@ class SprogPlugin extends BasePlugin
 
     public function getDeveloper()
     {
-        return 'Anthony Colangelo & Matt Stauffer';
+        return 'ninetwelve (Anthony Colangelo & Matt Stauffer)';
     }
 
     public function getDeveloperUrl()
     {
-        // How do we do multiple URLs? Do we need a shared URL for the two of us?
-        return 'http://mattstauffer.co/';
+        return 'http://ninetwelve.co/';
     }
 
     public function hasCpSection()
