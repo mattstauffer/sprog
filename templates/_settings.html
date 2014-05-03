@@ -1,0 +1,12 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.selectField({
+    label: "test"|t,
+    id: 'testSettingsDude',
+    name: 'testSettingsDude',
+    instructions: "Test settings, dude."|t,
+    value: settings.testSettingsDude,
+    autofocus: true,
+    options: ['All the things', 'Some the things', 'None the things'],
+    errors: settings.getErrors('testSettingsDude')
+}) }}
