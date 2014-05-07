@@ -1,12 +1,11 @@
 {% import "_includes/forms" as forms %}
 
-{{ forms.selectField({
-    label: "test"|t,
-    id: 'testSettingsDude',
-    name: 'testSettingsDude',
-    instructions: "Test settings, dude."|t,
-    value: settings.testSettingsDude,
+{{ forms.textField({
+    label: "API Route Key"|t,
+    id: 'api_route_key',
+    name: 'api_route_key',
+    instructions: "URI key for API (e.g. site.com/api/ would have a API Route Key of 'api'"|t,
+    value: settings.api_route_key,
     autofocus: true,
-    options: ['All the things', 'Some the things', 'None the things'],
-    errors: settings.getErrors('testSettingsDude')
+    errors: settings.getErrors('api_route_key')
 }) }}

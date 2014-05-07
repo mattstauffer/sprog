@@ -2,50 +2,48 @@
 
 class SprogPlugin extends BasePlugin
 {
-	protected $route_key = 'api';
+	public function getName()
+	{
+		return Craft::t('Sprog');
+	}
 
-    public function getName()
-    {
-        return Craft::t('Sprog');
-    }
+	public function getVersion()
+	{
+		return '0.1';
+	}
 
-    public function getVersion()
-    {
-        return '0.1';
-    }
+	public function getDeveloper()
+	{
+		return 'ninetwelve (Anthony Colangelo & Matt Stauffer)';
+	}
 
-    public function getDeveloper()
-    {
-        return 'ninetwelve (Anthony Colangelo & Matt Stauffer)';
-    }
+	public function getDeveloperUrl()
+	{
+		return 'http://ninetwelve.co/';
+	}
 
-    public function getDeveloperUrl()
-    {
-        return 'http://ninetwelve.co/';
-    }
+	public function hasCpSection()
+	{
+		return true;
+	}
 
-    public function hasCpSection()
-    {
-        return true;
-    }
-
-    /**
-     * Register control panel routes
-     */
-    public function registerCpRoutes()
-    {
-        return array(
-            'sprog\/routes\/new' => 'sprog/routes/_edit',
-            'sprog\/routes\/(?P<routeId>\d+)' => 'sprog/routes/_edit',
-        );
-    }
+	/**
+	 * Register control panel routes
+	 */
+	public function registerCpRoutes()
+	{
+		return array(
+			'sprog\/routes\/new' => 'sprog/routes/_edit',
+			'sprog\/routes\/(?P<routeId>\d+)' => 'sprog/routes/_edit',
+		);
+	}
 
 	protected function defineSettings()
 	{
 		return array(
-			'testSettingsDude' => array(
+			'api_route_key' => array(
 				AttributeType::Mixed,
-				'default' => 'All the things'
+				'default' => 'api'
 			),
 		);
 	}
@@ -66,10 +64,14 @@ class SprogPlugin extends BasePlugin
 
 	public function init()
 	{
-		if (craft()->request->getSegment(1) == $this->route_key) {
+		if ($this->shouldCaptureRequest(craft()->request)) {
 			craft()->sprog_route->initRequest(craft()->request);
 			craft()->sprog_route->route();
 		}
 	}
 
+	protected function shouldCaptureRequest(HttpRequestService $request)
+	{
+		return $this->getSettings()->api_route_key == $request->getSegment(1);
+	}
 }
