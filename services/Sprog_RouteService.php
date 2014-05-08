@@ -1,4 +1,8 @@
-<?php  namespace Craft;
+<?php namespace Craft;
+
+use CJavaScript;
+use CWebLogRoute;
+use Yii;
 
 class Sprog_RouteService extends BaseApplicationComponent
 {
@@ -43,11 +47,33 @@ class Sprog_RouteService extends BaseApplicationComponent
 
 	public function route()
 	{
+		if ( ! $this->resource_key) {
+			// @todo: Throw 404?
+			return; // Allow pass through to 404
+		}
+
+		// $this->renderJSON(['testing' => 'yes i am']);
+
 		echo "Requested asset <b>{$this->resource_key}</b>";
 		if ($this->resource_id) {
 			echo " (asset #{$this->resource_id})";
 		}
 		echo ": action <i>{$this->resource_action}</i>";
 		exit;
+	}
+
+	protected function renderJSON(array $object)
+	{
+		header('Content-type: application/json');
+		echo CJavaScript::encode($object);
+
+		// http://stackoverflow.com/questions/2824805/how-to-get-response-as-json-formatapplication-json-in-yii
+		foreach (Yii::app()->log->routes as $route) {
+			if ($route instanceof CWebLogRoute) {
+				$route->enabled = false; // disable any weblogroutes
+			}
+		}
+		
+		Yii::app()->end();
 	}
 }
