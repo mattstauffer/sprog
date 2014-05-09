@@ -19,7 +19,7 @@ class Sprog_RouteService extends BaseApplicationComponent
 		'create'
 	);
 
-	public function initRequest(HttpRequestService $request)
+	public function boot(HttpRequestService $request)
 	{
 		$this->request = $request;
 		$this->segments = $request->getSegments();

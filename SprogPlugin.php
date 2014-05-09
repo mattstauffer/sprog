@@ -65,7 +65,7 @@ class SprogPlugin extends BasePlugin
 	public function init()
 	{
 		if ($this->shouldCaptureRequest(craft()->request)) {
-			craft()->sprog_route->initRequest(craft()->request);
+			craft()->sprog_route->boot(craft()->request);
 			craft()->sprog_route->route();
 		}
 	}
