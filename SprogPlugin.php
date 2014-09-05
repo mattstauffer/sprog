@@ -14,12 +14,12 @@ class SprogPlugin extends BasePlugin
 
 	public function getDeveloper()
 	{
-		return 'ninetwelve (Anthony Colangelo & Matt Stauffer)';
+		return 'Matt Stauffer';
 	}
 
 	public function getDeveloperUrl()
 	{
-		return 'http://ninetwelve.co/';
+		return 'http://mattstauffer.co/';
 	}
 
 	public function hasCpSection()
